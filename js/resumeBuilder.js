@@ -95,12 +95,12 @@ var formattedLocation=HTMLlocation.replace("%data%",bio.contact.location);
 $("#header").append(formattedName);
 $("#header").append(formattedRole);
 $("#header").append(formattedPic);
-
+$("#header").append(formattedMessage);
 $("#header").append(formattedMobile);
 $("#header").append(formattedEmail);
 $("#header").append(formattedGitHub);
 $("#header").append(formattedLocation);
-$("#header").append(formattedMessage);
+
 
 if(bio.skills.length > 0){
   $("#header").append(HTMLskillsStart);
