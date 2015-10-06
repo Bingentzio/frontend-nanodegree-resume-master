@@ -83,35 +83,37 @@ var education={
 ]
 }
 
-var formattedName=HTMLheaderName.replace("%data%",bio.name);
-var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
-var formattedPic=HTMLbioPic.replace("%data%",bio.pic);
-var formattedMessage=HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
-var formattedMobile=HTMLmobile.replace("%data%",bio.contact.mobile);
-var formattedEmail=HTMLemail.replace("%data%",bio.contact.email);
-var formattedGitHub=HTMLgithub.replace("%data%",bio.contact.github);
-var formattedLocation=HTMLlocation.replace("%data%",bio.contact.location);
+function displayWork(){
 
-$("#header").append(formattedName);
-$("#header").append(formattedRole);
-$("#header").append(formattedPic);
-$("#header").append(formattedMessage);
-$("#header").append(formattedMobile);
-$("#header").append(formattedEmail);
-$("#header").append(formattedGitHub);
-$("#header").append(formattedLocation);
+  var formattedName=HTMLheaderName.replace("%data%",bio.name);
+  var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
+  var formattedPic=HTMLbioPic.replace("%data%",bio.pic);
+  var formattedMessage=HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
+  var formattedMobile=HTMLmobile.replace("%data%",bio.contact.mobile);
+  var formattedEmail=HTMLemail.replace("%data%",bio.contact.email);
+  var formattedGitHub=HTMLgithub.replace("%data%",bio.contact.github);
+  var formattedLocation=HTMLlocation.replace("%data%",bio.contact.location);
 
+  $("#header").prepend(formattedMessage);
+  $("#header").prepend(formattedPic);
+  $("#header").prepend(formattedRole);
+  $("#header").prepend(formattedName);
+  $("#topContacts").append(formattedMobile);
+  $("#topContacts").append(formattedEmail);
+  $("#topContacts").append(formattedGitHub);
+  $("#topContacts").append(formattedLocation);
 
-if(bio.skills.length > 0){
-  $("#header").append(HTMLskillsStart);
-  for (skill in bio.skills){
-    var formattedSkill= HTMLskills.replace("%data%",bio.skills[skill]);
-    $("#skills").append(formattedSkill);
+  if(bio.skills.length > 0){
+    $("#header").append(HTMLskillsStart);
+    for (skill in bio.skills){
+      var formattedSkill= HTMLskills.replace("%data%",bio.skills[skill]);
+      $("#skills").append(formattedSkill);
+    }
   }
-}
-if(work.jobs.length > 0){
-  $("#workExperience").append(HTMLworkStart);
+
   for (job in work.jobs){
+    //create a div for work experience
+    $("#workExperience").append(HTMLworkStart);
     var formattedEmployer= HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
     var formattedTitle= HTMLworkTitle.replace("%data%",work.jobs[job].title);
     var formattedEmployerTitle = formattedEmployer + formattedTitle;
@@ -124,3 +126,22 @@ if(work.jobs.length > 0){
     $(".work-entry:last").append(formattedDescription);
   }
 }
+
+displayWork();
+
+$(document).click(function(loc) {
+  logClicks(loc.pageX,loc.pageY);
+});
+
+
+
+function inName(){
+    var name = window.name;
+    name = name.trim().split(" ");
+    console.log(name);
+    name[1] = name[1].toUpperCase();
+    name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+    return name[0] +" "+ name[1];
+}
+var name = $("#name").text();
+$("#main").append(internationalizeButton);
