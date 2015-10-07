@@ -5,14 +5,14 @@ var work={
     "title":"JAVA Programer",
     "location":"Beasain, Basque Country",
     "dates":"2014/09/01-Nowadays",
-    "description":"Programing web application and maintaining servers"
+    "description":"Actually working as a JAVA Programer, programing web and desktop applications, also mantaining servers."
   },
   {
     "employer":"Ik4-Tekniker",
     "title":"Robotics Developer",
     "location":"Eibar, Basque Country",
     "dates":"2014/01/01-2014/07/24",
-    "description":"Software for robotics"
+    "description":"Making test with robots using ROS and C programation to improve the software."
   }
 ]
 };
@@ -22,14 +22,14 @@ var projects={
   {
     "title":"Cheese championship",
     "dates":"2015/04/02-2015/09/02",
-    "description":"A rating system in a web application",
-    "images":""
+    "description":"A rating system for an important cheese championship in a web application to improve the velocity of the results calculation.",
+    "images":["images/jsf.jpg","images/primefaces.jpg","images/hibernate.jpg"]
   },
   {
     "title":"Raffle",
     "dates":"2015/02/01-2015/03/25",
-    "description":"A JAVA application to make a raffle with whatsapp messages",
-    "images":""
+    "description":"A JAVA application to make a raffle with whatsapp messages for a local TV",
+    "images":["images/java.jpg","images/wp.jpg"]
   }
 ]
 };
@@ -133,8 +133,6 @@ $(document).click(function(loc) {
   logClicks(loc.pageX,loc.pageY);
 });
 
-
-
 function inName(){
     var name = window.name;
     name = name.trim().split(" ");
@@ -145,3 +143,19 @@ function inName(){
 }
 var name = $("#name").text();
 $("#main").append(internationalizeButton);
+
+projects.display = function(){
+  for (p in projects.project){
+  $("#projects").append(HTMLprojectStart);
+  $(".project-entry:last").append(HTMLprojectTitle.replace("%data%",projects.project[p].title));
+  $(".project-entry:last").append(HTMLprojectDates.replace("%data%",projects.project[p].dates));
+  $(".project-entry:last").append(HTMLprojectDescription.replace("%data%",projects.project[p].description));
+  if(projects.project[p].images.length>0){
+    for (image in projects.project[p].images)
+    $(".project-entry:last").append(HTMLprojectImage.replace("%data%",projects.project[p].images[image]));
+  }
+
+  }
+}
+
+projects.display();
