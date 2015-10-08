@@ -12,7 +12,7 @@ var work={
     "title":"Robotics Developer",
     "location":"Eibar, Basque Country",
     "dates":"2014/01/01-2014/07/24",
-    "description":"Making test with robots using ROS and C programation to improve the software."
+    "description":"Making tests with robots using ROS and C programation to improve the software."
   }
 ]
 };
@@ -36,7 +36,7 @@ var projects={
 
 var bio={
 "name":"Bingen Gonzalez",
-"role":"Web Developer",
+"role":"Software Engineer",
 "contact":{
   "mobile":"665741928",
   "email":"bingen.glez@gmail.com",
@@ -44,7 +44,7 @@ var bio={
   "location":"Ordizia, Basque Country"
 },
 "welcomeMessage":"Welcome to my CV.",
-"skills":["funny","hard worker", "awesome"],
+"skills":["communication","teamwork", "initiative","problem solving"],
 "pic":"images/fry.jpg"
 };
 
@@ -54,16 +54,24 @@ var education={
     "name":"University of Basque Country",
     "location":"Donostia, Basque Country",
     "degree":"Computer Engineering",
-    "majors":[],
+    "majors":"CS",
     "dates":"2011-2014",
     "url":"http://www.ehu.eus/eu/web/informatika-fakultatea"
+  },
+  {
+    "name":"Eötvös Loránd University",
+    "location":"Budapest, Hungary",
+    "degree":"MASTER",
+    "majors":"CS",
+    "dates":"2013",
+    "url":"http://www.elte.hu"
   },
   {
     "name":"University of Basque Country",
     "location":"Donostia, Basque Country",
     "degree":"Information Technology and Software Engineering",
-    "majors":[],
-    "dates":"",
+    "majors":"CS",
+    "dates":"2007-2011",
     "url":"http://www.ehu.eus/eu/web/informatika-fakultatea"
   }
 ],
@@ -83,7 +91,7 @@ var education={
 ]
 }
 
-function displayWork(){
+
 
   var formattedName=HTMLheaderName.replace("%data%",bio.name);
   var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
@@ -102,15 +110,19 @@ function displayWork(){
   $("#topContacts").append(formattedEmail);
   $("#topContacts").append(formattedGitHub);
   $("#topContacts").append(formattedLocation);
+  $("#footerContacts").append(formattedMobile);
+  $("#footerContacts").append(formattedEmail);
+  $("#footerContacts").append(formattedGitHub);
+  $("#footerContacts").append(formattedLocation);
 
   if(bio.skills.length > 0){
     $("#header").append(HTMLskillsStart);
     for (skill in bio.skills){
       var formattedSkill= HTMLskills.replace("%data%",bio.skills[skill]);
-      $("#skills").append(formattedSkill);
+      $("#skillsH3").append(formattedSkill);
     }
   }
-
+function displayWork(){
   for (job in work.jobs){
     //create a div for work experience
     $("#workExperience").append(HTMLworkStart);
@@ -129,9 +141,6 @@ function displayWork(){
 
 displayWork();
 
-$(document).click(function(loc) {
-  logClicks(loc.pageX,loc.pageY);
-});
 
 function inName(){
     var name = window.name;
@@ -142,7 +151,6 @@ function inName(){
     return name[0] +" "+ name[1];
 }
 var name = $("#name").text();
-$("#main").append(internationalizeButton);
 
 projects.display = function(){
   for (p in projects.project){
@@ -153,9 +161,29 @@ projects.display = function(){
   if(projects.project[p].images.length>0){
     for (image in projects.project[p].images)
     $(".project-entry:last").append(HTMLprojectImage.replace("%data%",projects.project[p].images[image]));
-  }
-
+    }
   }
 }
-
 projects.display();
+
+education.display = function(){
+  for (e in education.schools){
+  $("#education").append(HTMLschoolStart);
+  $(".education-entry:last").append(HTMLschoolName.replace("%data%",education.schools[e].name)+HTMLschoolDegree.replace("%data%",education.schools[e].degree));
+  $(".education-entry:last").append(HTMLschoolDates.replace("%data%",education.schools[e].dates));
+
+  $(".education-entry:last").append(HTMLschoolLocation.replace("%data%",education.schools[e].location));
+  $(".education-entry:last").append(HTMLschoolMajor.replace("%data%",education.schools[e].majors));
+  }
+  $(".education-entry:last").append(HTMLonlineClasses);
+  for (o in education.onlineCourses){
+
+    $(".education-entry:last").append(HTMLonlineTitle.replace("%data%",education.onlineCourses[o].title)+HTMLonlineSchool.replace("%data%",education.onlineCourses[o].school));
+    $(".education-entry:last").append(HTMLonlineDates.replace("%data%",education.onlineCourses[o].dates));
+    $(".education-entry:last").append(HTMLonlineURL.replace("%data%",education.onlineCourses[o].url));
+    }
+
+}
+education.display();
+$("#main").append(internationalizeButton);
+$("#mapDiv").append(googleMap);
